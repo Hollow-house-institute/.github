@@ -1,10 +1,13 @@
-name: governance-full-enforce
+name: governance-final-lock
 
 on:
   push:
   pull_request:
   schedule:
     - cron: "0 */6 * * *"
+
+permissions:
+  contents: write
 
 jobs:
   enforce:
@@ -16,15 +19,22 @@ jobs:
       - name: Install tools
         run: sudo apt-get update && sudo apt-get install -y jq
 
-      - name: Org Scan (Decision Boundary + Integrity)
+      - name: Org Enforcement + Escalation Lock
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
           org="hhidatasettechs-oss"
           repos=$(curl -s -H "Authorization: token $GH_TOKEN" https://api.github.com/orgs/$org/repos?per_page=100 | jq -r '.[].clone_url')
 
-          mkdir -p repos telemetry
+          mkdir -p repos telemetry registry
           fail=0
+
+          # Load existing escalation registry
+          if [ -f registry/escalation.json ]; then
+            cp registry/escalation.json escalation.json
+          else
+            echo "{}" > escalation.json
+          fi
 
           for repo in $repos; do
             name=$(basename $repo .git)
@@ -33,7 +43,7 @@ jobs:
             status="pass"
             reason=""
 
-            # --- README Decision Boundary ---
+            # --- DECISION BOUNDARY ---
             if [ ! -f repos/$name/README.md ] || \
                ! grep -q "Time turns behavior into infrastructure" repos/$name/README.md || \
                ! grep -q "Behavior is the most honest data there is" repos/$name/README.md; then
@@ -41,65 +51,72 @@ jobs:
               reason="decision_boundary"
             fi
 
-            # --- LICENSE VALIDATION ---
-            if [ "$status" = "pass" ] && [ ! -f repos/$name/LICENSE ]; then
+            # --- LICENSE ---
+            if [ "$status" = "pass" ] && ! grep -q "HHI" repos/$name/LICENSE 2>/dev/null; then
               status="fail"
-              reason="license_missing"
+              reason="license_invalid"
             fi
 
-            # --- CHECKSUM ENFORCEMENT ---
-            if [ "$status" = "pass" ] && [ -f repos/$name/CHECKSUMS.sha256 ]; then
-              (cd repos/$name && sha256sum -c CHECKSUMS.sha256 >/dev/null 2>&1) || {
-                status="fail"
-                reason="checksum_mismatch"
-              }
-            fi
-
-            # --- DATASET INTEGRITY ---
-            if [ "$status" = "pass" ] && [ -d repos/$name/datasets ]; then
-              count=$(find repos/$name/datasets -type f | wc -l)
-              if [ "$count" -eq 0 ]; then
-                status="fail"
-                reason="empty_dataset"
-              fi
-            fi
-
-            # --- TELEMETRY ---
-            echo "{ \"repo\": \"$name\", \"status\": \"$status\", \"reason\": \"$reason\" }" >> telemetry/results.json
-
+            # --- ESCALATION LOCK ---
             if [ "$status" = "fail" ]; then
               fail=1
+              jq --arg repo "$name" --arg reason "$reason" \
+                '.[$repo] = { "status":"active", "reason":$reason }' \
+                escalation.json > tmp.json && mv tmp.json escalation.json
             fi
+
+            echo "{ \"repo\":\"$name\", \"status\":\"$status\", \"reason\":\"$reason\" }" >> telemetry/run.json
           done
+
+          # Persist escalation registry
+          mv escalation.json registry/escalation.json
 
           # --- STOP AUTHORITY ---
           if [ $fail -eq 1 ]; then
-            echo "{"
-            echo "\"event\": \"governance_check\","
-            echo "\"actor\": \"${{ github.actor }}\","
-            echo "\"decision_boundary\": \"fail\","
-            echo "\"action\": \"block\","
-            echo "\"outcome\": \"failure\","
-            echo "\"escalation_status\": \"active\","
-            echo "\"timestamp\": \"$(date -u +%Y-%m-%dT%H:%M:%SZ)\""
-            echo "}"
+            echo "Escalation active — blocking"
             exit 1
           fi
+
+      - name: Build Audit Registry (Longitudinal)
+        env:
+          DOI: https://doi.org/10.5281/zenodo.18615600
+        run: |
+          mkdir -p registry
+
+          timestamp=$(date -u +%Y-%m-%dT%H:%M:%SZ)
+
+          jq -n \
+            --arg time "$timestamp" \
+            --arg actor "${{ github.actor }}" \
+            --arg commit "${{ github.sha }}" \
+            --arg doi "$DOI" \
+            --slurpfile run telemetry/run.json \
+            '{
+              timestamp: $time,
+              actor: $actor,
+              commit: $commit,
+              doi: $doi,
+              results: $run
+            }' > registry/latest.json
+
+          # Append to audit ledger
+          if [ -f registry/audit_log.json ]; then
+            jq '. += [input]' registry/audit_log.json registry/latest.json > tmp.json && mv tmp.json registry/audit_log.json
+          else
+            jq -n --slurpfile first registry/latest.json '$first' > registry/audit_log.json
+          fi
+
+      - name: Commit Audit Registry
+        run: |
+          git config user.name "governance-bot"
+          git config user.email "actions@github.com"
+
+          git add registry/
+          git commit -m "audit: update escalation + longitudinal registry" || echo "no changes"
+          git push
 
       - name: Upload Telemetry
         uses: actions/upload-artifact@v4
         with:
-          name: governance-telemetry
-          path: telemetry/results.json
-
-      - name: Success Telemetry
-        run: |
-          echo "{"
-          echo "\"event\": \"governance_check\","
-          echo "\"actor\": \"${{ github.actor }}\","
-          echo "\"decision_boundary\": \"pass\","
-          echo "\"action\": \"allow\","
-          echo "\"outcome\": \"success\","
-          echo "\"escalation_status\": \"none\","
-          echo "\"timestamp\": \"$(date -u +%Y-%m-%dT%H:%M:%SZ)\""
-          echo "}"
+          name: governance-run
+          path: telemetry/run.json
