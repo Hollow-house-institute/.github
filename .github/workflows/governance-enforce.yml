@@ -1,8 +1,10 @@
-name: governance-enforce
+name: governance-enforce-org
 
 on:
   pull_request:
   push:
+  schedule:
+    - cron: "0 */6 * * *"
 
 jobs:
   enforce:
@@ -11,26 +13,49 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
-      - name: Validate README (Decision Boundary)
+      - name: Install jq
+        run: sudo apt-get update && sudo apt-get install -y jq
+
+      - name: Scan Organization Repos (Decision Boundary)
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
-          if ! grep -q "Time turns behavior into infrastructure" README.md || \
-             ! grep -q "Behavior is the most honest data there is" README.md; then
-            echo "Decision Boundary failed"
+          org="hhidatasettechs-oss"
+          repos=$(curl -s -H "Authorization: token $GH_TOKEN" https://api.github.com/orgs/$org/repos?per_page=100 | jq -r '.[].clone_url')
 
-            echo "{"
-            echo "\"event\": \"governance_check\","
-            echo "\"actor\": \"${{ github.actor }}\","
-            echo "\"decision_boundary\": \"fail\","
-            echo "\"action\": \"block\","
-            echo "\"outcome\": \"failure\","
-            echo "\"escalation_status\": \"active\","
-            echo "\"timestamp\": \"$(date -u +%Y-%m-%dT%H:%M:%SZ)\""
-            echo "}"
+          fail=0
+          mkdir -p telemetry
 
+          for repo in $repos; do
+            name=$(basename $repo .git)
+            git clone --depth=1 $repo repos/$name 2>/dev/null || continue
+
+            if [ ! -f repos/$name/README.md ]; then
+              status="fail"
+              fail=1
+            elif ! grep -q "Time turns behavior into infrastructure" repos/$name/README.md || \
+                 ! grep -q "Behavior is the most honest data there is" repos/$name/README.md; then
+              status="fail"
+              fail=1
+            else
+              status="pass"
+            fi
+
+            echo "{ \"repo\": \"$name\", \"status\": \"$status\" }" >> telemetry/results.json
+          done
+
+          if [ $fail -eq 1 ]; then
+            echo "Decision Boundary failed across org"
             exit 1
           fi
 
-      - name: Telemetry (Success Path)
+      - name: Upload Telemetry Artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: governance-telemetry
+          path: telemetry/results.json
+
+      - name: Success Telemetry
         run: |
           echo "{"
           echo "\"event\": \"governance_check\","
