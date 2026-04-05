@@ -11,14 +11,26 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
-      - name: Validate README header (Decision Boundary)
+      - name: Validate README (Decision Boundary)
         run: |
-          if ! grep -q "Time turns behavior into infrastructure" README.md; then
+          if ! grep -q "Time turns behavior into infrastructure" README.md || \
+             ! grep -q "Behavior is the most honest data there is" README.md; then
             echo "Decision Boundary failed"
+
+            echo "{"
+            echo "\"event\": \"governance_check\","
+            echo "\"actor\": \"${{ github.actor }}\","
+            echo "\"decision_boundary\": \"fail\","
+            echo "\"action\": \"block\","
+            echo "\"outcome\": \"failure\","
+            echo "\"escalation_status\": \"active\","
+            echo "\"timestamp\": \"$(date -u +%Y-%m-%dT%H:%M:%SZ)\""
+            echo "}"
+
             exit 1
           fi
 
-      - name: Telemetry Output
+      - name: Telemetry (Success Path)
         run: |
           echo "{"
           echo "\"event\": \"governance_check\","
