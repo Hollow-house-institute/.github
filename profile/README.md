@@ -84,3 +84,6 @@ https://dev.to/hollowhouse
 ---
 
 Governance must precede agent autonomy.
+
+## Governance Proof
+[![DOI](https://zenodo.org/badge/1135368168.svg)](https://doi.org/10.5281/zenodo.20041931)
