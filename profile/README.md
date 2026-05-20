@@ -1,202 +1,291 @@
-# Hollow House Institute (HHI)
+Hollow House Institute (HHI)
 
 Behavioral AI Governance Infrastructure focused on Execution-Time Governance, runtime accountability, behavioral drift detection, and longitudinal governance continuity for AI systems operating across time.
 
----
-
-
-## Governance Ecosystem Layers
-
-- Standards Layer → Hollow_House_Standards_Library
-- Runtime Governance Layer → HHI_GOV_01
-- Runtime Evidence Layer → HHI_Runtime_Proof
-- Audit & Case Study Layer → HHI_Audits
-- Professional Portfolio Layer → HHI_Career_Runtime
-- Governance Enforcement Layer → Master_License_Suite
 
 ---
 
-## What HHI Focuses On
+Governance Ecosystem Layers
+
+Layer	Repository	Purpose
+
+Standards Layer	[Hollow_House_Standards_Library](https://github.com/Hollow-house-institute/Hollow_House_Standards_Library?utm_source=chatgpt.com)	Canonical terminology, ontology, doctrine, standards mappings, governance architecture
+Runtime Governance Layer	[HHI_GOV_01](https://github.com/Hollow-house-institute/HHI_GOV_01?utm_source=chatgpt.com)	Execution-time governance runtime infrastructure
+Runtime Evidence Layer	[HHI_Runtime_Proof](https://github.com/Hollow-house-institute/HHI_Runtime_Proof?utm_source=chatgpt.com)	Replay-capable runtime telemetry and operational proof artifacts
+Audit & Case Study Layer	[HHI_Audits](https://github.com/Hollow-house-institute/HHI_Audits?utm_source=chatgpt.com)	Governance audits, drift case studies, interoperability analysis
+Professional Portfolio Layer	[HHI_Career_Runtime](https://github.com/Hollow-house-institute/HHI_Career_Runtime?utm_source=chatgpt.com)	Operational portfolio and governance implementation evidence
+Governance Enforcement Layer	[Master_License_Suite](https://github.com/Hollow-house-institute/Master_License_Suite?utm_source=chatgpt.com)	Licensing, governance enforcement, authority protection
+
+
+
+---
+
+What HHI Focuses On
 
 Most AI governance frameworks evaluate systems before deployment.
 
 HHI focuses on governance during execution while systems are actively operating.
 
 This includes:
-- Behavioral Drift
-- Decision Boundary enforcement
-- Stop Authority
-- Governance Telemetry
-- Escalation visibility
-- Longitudinal Accountability
-- Continuous Assurance
-- Runtime observability
-- Replayable governance evidence
 
-Core idea:
+Behavioral Drift
+
+Decision Boundary enforcement
+
+Stop Authority
+
+Governance Telemetry
+
+Escalation visibility
+
+Longitudinal Accountability
+
+Continuous Assurance
+
+Runtime observability
+
+Replayable governance evidence
+
+Telemetry continuity
+
+Replay continuity
+
+Deployment survivability
+
+Governance event persistence
+
+
+Core principle:
 
 > Systems follow repeated behavior, not stated intent.
 
----
 
-## Why This Matters
 
-As AI systems become persistent, adaptive, memory-enabled, and multi-agent, governance can no longer function only as static policy documentation.
-
-The operational problem becomes:
-- Can humans observe drift over time?
-- Can accountability survive escalation?
-- Can intervention occur during execution?
-- Can organizations reconstruct what actually happened?
-- Can governance persist under operational pressure?
-
-HHI explores governance as continuous operational infrastructure rather than post-hoc review.
 
 ---
 
-## Core Repositories
+Execution-Time Governance
 
-### Standards & Terminology
-https://github.com/Hollow-house-institute/Hollow_House_Standards_Library
+HHI treats governance as operational infrastructure rather than static documentation.
 
-### Runtime Governance Infrastructure
-https://github.com/Hollow-house-institute/HHI_GOV_01
+The objective is not only to define policy, but to preserve accountability while systems are actively operating across time.
 
-### Runtime Governance Evidence
-https://github.com/Hollow-house-institute/HHI_Runtime_Proof
+Key operational questions include:
 
-### Governance Enforcement & Licensing
-https://github.com/Hollow-house-institute/Master_License_Suite
+Can humans observe behavioral drift over time?
 
-### Privacy & Governance Operations
-https://github.com/Hollow-house-institute/HHI_Privacy_Operations
+Can accountability survive escalation pressure?
+
+Can intervention occur during execution?
+
+Can governance survive deployment migration or restart?
+
+Can organizations reconstruct what actually happened?
+
+Can telemetry remain replayable and exportable?
+
+Can governance continuity persist under operational load?
+
+
+HHI explores governance as continuous runtime infrastructure rather than post-hoc compliance review.
+
 
 ---
 
-## Background
+Runtime Governance Infrastructure
+
+HHI runtime governance infrastructure emphasizes:
+
+Append-only governance telemetry
+
+Replay-capable evidence chains
+
+Runtime observability
+
+Behavioral drift monitoring
+
+Escalation orchestration
+
+Continuous assurance
+
+Governance event buses
+
+Snapshot recovery
+
+Portable governance evidence
+
+Deployment continuity
+
+Standards interoperability
+
+Human-in-the-loop stop authority
+
+
+Canonical operational doctrine:
+
+> Telemetry proves operation. Policies describe intent.
+
+
+
+
+---
+
+Core Repositories
+
+Standards & Terminology
+
+[Hollow_House_Standards_Library](https://github.com/Hollow-house-institute/Hollow_House_Standards_Library?utm_source=chatgpt.com)
+
+Runtime Governance Infrastructure
+
+[HHI_GOV_01](https://github.com/Hollow-house-institute/HHI_GOV_01?utm_source=chatgpt.com)
+
+Runtime Governance Evidence
+
+[HHI_Runtime_Proof](https://github.com/Hollow-house-institute/HHI_Runtime_Proof?utm_source=chatgpt.com)
+
+Governance Audits & Case Studies
+
+[HHI_Audits](https://github.com/Hollow-house-institute/HHI_Audits?utm_source=chatgpt.com)
+
+Governance Enforcement & Licensing
+
+[Master_License_Suite](https://github.com/Hollow-house-institute/Master_License_Suite?utm_source=chatgpt.com)
+
+Privacy & Governance Operations
+
+[HHI_Privacy_Operations](https://github.com/Hollow-house-institute/HHI_Privacy_Operations?utm_source=chatgpt.com)
+
+CPRA Governance Infrastructure
+
+[HHI_CPRA_Readiness_Acceleration_Suite](https://github.com/Hollow-house-institute/HHI_CPRA_Readiness_Acceleration_Suite?utm_source=chatgpt.com)
+
+Behavioral Governance & Drift Monitoring
+
+[HHI_Behavioral_Drift_Monitor](https://github.com/Hollow-house-institute/HHI_Behavioral_Drift_Monitor?utm_source=chatgpt.com)
+
+Local AI Governance
+
+[HHI_Local_AI_Governance_Framework](https://github.com/Hollow-house-institute/HHI_Local_AI_Governance_Framework?utm_source=chatgpt.com)
+
+
+---
+
+Standards Alignment
+
+HHI governance infrastructure maintains interoperability with:
+
+National Institute of Standards and Technology AI RMF
+
+International Organization for Standardization / IEC 42001
+
+European Union AI Act
+
+Organisation for Economic Co-operation and Development AI Principles
+
+CAISI governance testing models
+
+Enterprise SIEM interoperability patterns
+
+Runtime audit and continuous assurance workflows
+
+
+
+---
+
+Governance Event Model
+
+HHI runtime systems emphasize replay-capable governance telemetry built around append-only event infrastructure.
+
+Canonical governance event fields include:
+
+event_id
+
+timestamp
+
+actor
+
+session_id
+
+decision_boundary
+
+behavioral_drift_score
+
+escalation_level
+
+intervention_status
+
+stop_authority
+
+action
+
+outcome
+
+evidence_hash
+
+runtime_source
+
+
+Operational requirements:
+
+Replayable
+
+Exportable
+
+Checksum-bound
+
+Machine-readable
+
+Longitudinally observable
+
+Deployment portable
+
+
+
+---
+
+Background
 
 HHI emerged from longitudinal behavioral observation, nervous system healing, shadow work, and sustained interaction with AI systems over time.
 
 The work focuses heavily on:
-- continuity
-- accountability
-- replayability
-- behavioral traceability
-- governance during execution
-- preserving shared reality integrity across systems operating over time
+
+continuity
+
+accountability
+
+replayability
+
+behavioral traceability
+
+governance during execution
+
+preserving shared reality integrity across systems operating over time
+
+
 
 ---
 
-Time turns behavior into infrastructure.
+Canonical Principles
+
+> Time turns behavior into infrastructure.
 Behavior is the most honest data there is.
+
+
+
+
+---
+
+Canonical Authority References
 
 Canonical Source:
-https://github.com/Hollow-house-institute/Hollow_House_Standards_Library
+[Hollow_House_Standards_Library](https://github.com/Hollow-house-institute/Hollow_House_Standards_Library?utm_source=chatgpt.com)
 
 DOI:
-https://doi.org/10.5281/zenodo.20044740
+[10.5281/zenodo.20044740](https://doi.org/10.5281/zenodo.20044740?utm_source=chatgpt.com)
 
 ORCID:
-https://orcid.org/0009-0009-4806-1949
-# HHI Ecosystem Overview
+[Amy Pierce Bui ORCID Profile](https://orcid.org/0009-0009-4806-1949?utm_source=chatgpt.com)
 
-The Hollow House Institute ecosystem is organized as layered governance infrastructure focused on governance during active AI system execution.
-
-Primary ecosystem layers:
-
-1. Canonical Governance Standards
-2. Execution-Time Governance
-3. Runtime Observability & Telemetry
-4. Governance Audits & Replay Evidence
-5. Behavioral Governance Research
-6. Regulatory Governance Infrastructure
-7. Institutional & Executive Translation
-
----
-
-# Primary Onboarding Flow
-
-## 1. Canonical Standards & Terminology
-https://github.com/Hollow-house-institute/Hollow_House_Standards_Library
-
-## 2. Execution-Time Governance
-https://github.com/Hollow-house-institute/HHI_GOV_01
-
-## 3. Runtime Governance Observability
-https://github.com/Hollow-house-institute/HHI_Runtime_Proof
-
-## 4. Governance Audits & Replay Evidence
-https://github.com/Hollow-house-institute/HHI_Audits
-
-## 5. Professional & Executive Translation
-https://github.com/Hollow-house-institute/HHI_Career_Runtime
-
----
-
-# Canonical Ecosystem Governance Layer
-
-https://github.com/Hollow-house-institute/Governance_Infrastructure_Layer
-
----
-
-Policies describe intent.
-
-Runtime behavior reveals reality.
-
-Time turns behavior into infrastructure.
-
-Behavior is the most honest data there is.
-
-Amy Pierce Bui
-Founder, Hollow House Institute
-# HHI Ecosystem Overview
-
-The Hollow House Institute ecosystem is organized as layered governance infrastructure focused on governance during active AI system execution.
-
-Primary ecosystem layers:
-
-1. Canonical Governance Standards
-2. Execution-Time Governance
-3. Runtime Observability & Telemetry
-4. Governance Audits & Replay Evidence
-5. Behavioral Governance Research
-6. Regulatory Governance Infrastructure
-7. Institutional & Executive Translation
-
----
-
-# Primary Onboarding Flow
-
-## 1. Canonical Standards & Terminology
-https://github.com/Hollow-house-institute/Hollow_House_Standards_Library
-
-## 2. Execution-Time Governance
-https://github.com/Hollow-house-institute/HHI_GOV_01
-
-## 3. Runtime Governance Observability
-https://github.com/Hollow-house-institute/HHI_Runtime_Proof
-
-## 4. Governance Audits & Replay Evidence
-https://github.com/Hollow-house-institute/HHI_Audits
-
-## 5. Professional & Executive Translation
-https://github.com/Hollow-house-institute/HHI_Career_Runtime
-
----
-
-# Canonical Ecosystem Governance Layer
-
-https://github.com/Hollow-house-institute/Governance_Infrastructure_Layer
-
----
-
-Policies describe intent.
-
-Runtime behavior reveals reality.
-
-Time turns behavior into infrastructure.
-
-Behavior is the most honest data there is.
-
-Amy Pierce Bui
-Founder, Hollow House Institute
+GitHub Organization:
+[Hollow House Institute GitHub Organization](https://github.com/Hollow-house-institute?utm_source=chatgpt.com)
